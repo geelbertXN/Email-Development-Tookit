@@ -14,10 +14,10 @@ This Bash script will search for  HTML files listed in the config file and colle
 The script checks if the output folder already exists. If it does, the timestamp is appended to make it unique. The output folder is then created.
 
 ### Searching for Patterns
-The script uses a regular expression to find patterns within double square brackets `[[ ... ]]` in the template file. These patterns are stored in the `searches` array.
+The script will search for the list of component names listed in the config file that are placed inside [[.*]] double brackets.
 
 ### Processing Files
-The script iterates through each search string in the `searches` array and searches for corresponding HTML files in the current directory. It ignores files in the output folder.
+The script iterates through each search string in the `searches` array and searches for corresponding HTML files in the current directory/subdirectory. It ignores files in the output folder.
 
 For each search string:
 - If no matching files are found, an empty HTML file is created in the output folder.
