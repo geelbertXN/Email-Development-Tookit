@@ -1,7 +1,7 @@
 # Bash Script Explanation
 
 ## Overview
-This Bash script processes HTML files based on a template file and a search pattern. It creates a unique output folder with a timestamp, searches for specific patterns in the template file, and extracts content from corresponding HTML files, writing them to new files in the output folder.
+This Bash script will search for  HTML files listed in the config file and collect those files altogether in a separate output folder.
 
 ## Script Sections
 
