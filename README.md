@@ -16,16 +16,6 @@ The script checks if the output folder already exists. If it does, the timestamp
 ### Searching for Patterns
 The script will search for the list of component names listed in the config file that are placed inside [[.*]] double brackets.
 
-### Processing Files
-The script iterates through each search string in the `searches` array and searches for corresponding HTML files in the current directory/subdirectory. It ignores files in the output folder.
-
-For each search string:
-- If no matching files are found, an empty HTML file is created in the output folder.
-- If matching files are found, their content is read and written to new HTML files in the output folder. The index is used to differentiate between files.
-
-### File Naming and Content Writing
-The script processes each HTML file found, uses the base name and parameter expansion to construct a new filename within the output folder, and writes the content to the new HTML file. The index ensures each file has a unique name.
-
 ## Usage
 To use the script:
 1. Save the script to a file, e.g., `process_html.sh`.
