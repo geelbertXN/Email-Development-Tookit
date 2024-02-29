@@ -1,0 +1,79 @@
+preheader=>Chevy cares.
+<!-- [Chevrolet] -->
+logo-img=>images/gmpdmResB10159_2308_CHE_T2_TR23CRM012_SLD_bowtie_154x59_V1.png alt=CHEVROLET
+<!-- [CTA] -->
+
+btn1=>Current Offers
+btn2=>Search Inventory
+btn3=>Build & Price]]
+
+img-masthead1=>images/gmpdmResB10159_2308_CHE_T2_TR23CRM012_SLD_a_600x479.png   alt1=>Chevrolet
+img-masthead2=>images/gmpdmResB10159_2308_CHE_T2_TR23CRM012_SLD_e_360x360.png   alt1=>Chevrolet
+img-military1=>images/gmpdmResB10159_2308_CHE_T2_TR23CRM012_SLD_b_520x345.png   alt2=>Military family
+img-military2=>images/gmpdmResB10159_2308_CHE_T2_TR23CRM012_SLD_b_520x345.png   alt2=>Military family
+img-truck=>images/gmpdmResB10159_2308_CHE_T2_TR23CRM012_SLD_b_520x345.png       alt3=>Truck Legends
+img-certified=>images/gmpdmResB10159_2308_CHE_T2_TR23CRM012_SLD_b_520x345.png   alt4=>Certified Service
+img-myrewards=>images/gmpdmResB10159_2308_CHE_T2_TR23CRM012_SLD_b_520x345.png   alt5=>My Rewards
+
+<!-- CONTENT AREA 1: -->
+<!-- [COPY] -->
+# This type of format is for multiline data will be useful
+# if you want to use tags as part of data to insert
+copy1=>{
+    [Name], at Chevrolet, our commitment to building 
+    a better world goes far beyond manufacturing dependable, 
+    [{long-lastingtrucks}]. It encompasses everything 
+    from forging meaningful partnerships to pursuing 
+    initiatives that truly make 
+    a difference in people’s lives.
+}
+
+# <!-- [Image: Military family] -->
+# <!-- [HEAD] -->
+head1=>BECAUSE WE CARE. 
+body1=>Chevrolet supports those working for change. We are proud to celebrate our differences with the same passion that we have for what brings us together. 
+cta1=>Explore Chevy Cares
+
+head2=>SILVERADO EVS FOR EVERYONE.
+body2=>[{Chevrolet is always striving to give our trucks the best that modern technology has to offer. We’re all in on an electric future, and the First-Ever All-Electric Silverado stands as proof of our commitment to efficiency, power and a cleaner tomorrow.}]
+cta2=>Silverado EV
+
+
+head3=>ARE YOU A LEGEND?
+body3=>Join the community for the most legendary trucks and owners to receive exclusive merchandise, special discounts and more.
+cta3=>Join Chevy Truck Legends
+
+subhead1=>CHEVY OWNER EXCLUSIVES.
+sub-copy1=>[{Using state-of-the-art diagnostics and Multi-Point Vehicle Inspections,1 our Certified Service technicians can help you get back on the road with confidence.}]
+
+subhead2=>DRIVE WITH CONFIDENCE
+sub-cta1=>Get the Details
+
+sub-head3=>MY CHEVROLET REWARDS2
+sub-copy3=>[{Earn and redeem points on most things you do with Chevrolet. Earning points is easy – and flexible redemption options let you use your points, your way. Feel the power of appreciation with My Chevrolet Rewards.}]
+sub-cta3=>Learn More
+
+<!-- FOOTER/DISCLOSURES: -->
+img-find-new-roads=> alt=>Find New Roads
+
+social1=> alt=>TikTok 
+social2=> alt=>Instagram 
+social3=> alt=>Facebook 
+social4=> alt=>Youtube
+
+Contact Us | Request Information
+
+footer1=>Add Chevrolet@delivery.Chevrolet.com to your address book.
+
+footer2=>1 See dealer for complete details. Multi-Point Vehicle Inspections vary by participating dealer.
+
+footer3=>2 [{Must be 18 years or older. Points may be earned and redeemed only at GM entities, My GM Rewards participating dealers or third-party retailers in the United States (excluding Puerto Rico, the U.S. Virgin Islands or Guam). Points are not earned on taxes, fees or body shop repair orders and expire without further notice upon Member Account deactivation. Visit mychevroletrewards.com to view My GM Rewards Terms & Conditions.}]
+
+fc4=>You are receiving this email advertisement because you expressed an interest in Chevrolet.
+
+Select Your Interests | Unsubscribe | [[Copyright]] & Trademark | GM Privacy Statement
+
+Chevrolet | 100 Renaissance Center | 482.A00.MAR | Detroit, MI 48265 | tel-no=>1-800-950-2438
+
+footer-end=>©2023 General Motors. All rights reserved. 
+        

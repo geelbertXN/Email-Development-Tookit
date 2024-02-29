@@ -1,0 +1,98 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use File::Basename;
+# use HTML::FormatText;
+# use HTML::Parser;
+# use HTML::Packer;
+my $CURRENT_PATH =" $(pwd)";
+my $BUILD_FILE = "$CURRENT_PATH/build.sh";
+my $DATA_PATH="/mnt/c/Users/glc/Documents/MRM/ONSTAR/scripts/data";
+my $ASSETS_HTML = "$DATA_PATH/assets/html";
+
+print "DATA_PATH: $DATA_PATH\n";
+
+# Set the source folder to "source" within the current working directory
+my $source_folder = "source";
+
+# Open the source folder and read its contents
+opendir(my $dh, $source_folder) or die "Could not open directory '$source_folder': $!";
+my $depth = 0;
+# Loop through each file in the source folder
+while (my $file = readdir($dh)) {
+    next if $file =~ /^\./;  # Skip hidden files
+
+    # if ($file =~ /\.html$/ && $file =~ /CONTAINER_/) {
+    if (($file =~ /\.html$/ || $file =~ /\.mjml$/) && $file =~ /CONTAINER_/) {
+        my $full_path = "$source_folder/$file";
+
+        open my $html_file, '<', $full_path or die "Could not open file '$full_path': $!";
+        my $html_content = do {
+            local $/ = undef;
+            <$html_file>;
+        };
+        close $html_file;
+        my @depths; # Initialize an empty array to store depths
+        my @lines = split(/\n/, $html_content);
+
+        foreach my $line (@lines) {
+            if ($line =~ /\[\[/) {
+                my ($leading_spaces) = $line =~ /^(\s*)/;
+                # my $depth = length($leading_spaces);
+                # print "Depth for line: $depth\n";
+            }
+        }      
+
+        if ($html_content =~ /\[\[.*?\]\]/) {
+            # print "HTML Content: $html_content\n";
+            my @html_values = $html_content =~ /\[\[(.*?)\]\]/g;
+            for my $i (0..$#html_values) {
+                my $ivalue = $html_values[$i];
+                my $content_path = "$ASSETS_HTML/$ivalue.html";
+
+                if (-e $content_path) {
+                    open my $i_html, '<', $content_path or die "Could not open file '$content_path': $!";
+                    my $i_content = do {
+                        local $/ = undef;
+                        <$i_html>;
+                    };
+                    close $i_html;
+
+                    my @lines = split(/\n/, $i_content);
+                    my $num_lines = scalar @lines;
+
+                    my $is_first_line = 1;
+
+                    foreach my $line (@lines) {
+                        # Add 5 spaces to all lines except the first one
+                        if (!$is_first_line) {
+                            $line = ' ' x 0 . $line;
+                        }
+                        $is_first_line = 0;  # Set to false after processing the first line
+                    }
+
+                    # print "Number of lines in \$i_content: $num_lines\n";
+                    # Join the lines back together
+                    $i_content = join("\n", @lines);
+
+                    $html_content =~ s/\[\[$ivalue\]\]/$i_content/g;             
+
+                } else {
+                    print "Insert value $ivalue not found!\n";
+                }
+            }
+
+            # Now $html_content contains the main HTML with insert content replaced
+            # Write the modified content back to the original HTML file
+            # Format the HTML content
+            my $formatted_html = $html_content;
+            # Write the formatted content back to the original HTML file
+            open my $output_html, '>', $full_path or die "Could not open file '$full_path' for writing: $!";
+            print $output_html $formatted_html;
+            close $output_html;
+        }
+    }
+}
+
+
+closedir($dh);

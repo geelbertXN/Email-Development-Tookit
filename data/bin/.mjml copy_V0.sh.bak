@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# Find all MJML files in the current directory
+# mjml_files=$(find . -maxdepth 1 -type f -name "*.mjml")
+
+# Loop through each MJML file found and compile to HTML
+# for file in $mjml_files; do
+#     # Extract the filename without the extension
+#     filename=$(basename "$file" .mjml)
+    
+#     # Compile MJML to HTML
+#     echo "Compiling $file to $filename.html"
+#     mjml "$file" -o "$filename.html"
+    
+#     # Check if compilation was successful
+#     if [ $? -eq 0 ]; then
+#         echo "Compilation successful!"
+#     else
+#         echo "Compilation failed for $file"
+#     fi
+# done
+# Source directory containing MJML files
+source_dir="./source"
+
+# Output directory for HTML files
+output_dir="./output"
+
+# Create output directory if it doesn't exist
+
+
+# Find all MJML files in the source directory
+mjml_files=$(find "$source_dir" -maxdepth 1 -type f -name "*.mjml")
+
+# Check if there are any MJML files
+if [ -z "$mjml_files" ]; then
+    echo "No MJML files found in $source_dir"
+else
+  
+    mkdir -p "$output_dir"
+    
+    # Loop through each MJML file found and compile to HTML
+    for file in $mjml_files; do
+        # Extract the filename without the extension
+        filename=$(basename "$file" .mjml)
+        
+        # Compile MJML to HTML
+        echo "Compiling $file to $output_dir/$filename.html"
+        mjml "$file" -o "$output_dir/$filename.html"
+        
+        # Check if compilation was successful
+        if [ $? -eq 0 ]; then
+            echo "Compilation successful!"
+        else
+            echo "Compilation failed for $file"
+        fi
+    done
+fi

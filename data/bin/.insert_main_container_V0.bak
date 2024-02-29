@@ -1,0 +1,63 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use File::Basename;
+use HTML::HTML5::Parser;
+
+my $DATA_PATH = "/mnt/c/Users/glc/Documents/MRM/ONSTAR/scripts/data";
+my $ASSETS_HTML = "$DATA_PATH/assets/html";
+
+# Set the source folder to "source" within the current working directory
+my $source_folder = "source";
+
+# Open the source folder and read its contents
+opendir(my $dh, $source_folder) or die "Could not open directory '$source_folder': $!";
+
+# Loop through each file in the source folder
+while (my $file = readdir($dh)) {
+    next if $file =~ /^\./;  # Skip hidden files
+
+    if ($file =~ /\.html$/ && $file =~ /CONTAINER_/) {
+        my $full_path = "$source_folder/$file";
+
+        open my $html_file, '<', $full_path or die "Could not open file '$full_path': $!";
+        my $html_content = do {
+            local $/ = undef;
+            <$html_file>;
+        };
+        close $html_file;
+
+        if ($html_content =~ /insert=/) {
+            my @html_values = $html_content =~ /insert=([^"\s]+)/g;
+            for my $i (0..$#html_values) {
+                my $ivalue = "$html_values[$i]";
+                my $content_path = "$ASSETS_HTML/insert-$ivalue.html";
+
+                if (-e $content_path) {
+                    open my $i_html, '<', $content_path or die "Could not open file '$content_path': $!";
+                    my $i_content = do {
+                        local $/ = undef;
+                        <$i_html>;
+                    };
+                    close $i_html;
+                    # Replace the insert= placeholder with the content of the insert HTML
+                    # $html_content =~ s/^(\s*)insert=$ivalue/$1$i_content/gm;
+                    # Replace the insert= placeholder with the content of the insert HTML
+                    $html_content =~ s/^(\s*)insert=$ivalue/$1$i_content/gm;
+                } else {
+                    print "Insert value [$html_values[$i]] not found!\n";
+                }
+            }
+
+            # Now $html_content contains the main HTML with insert content replaced
+            # Write the modified content back to the original HTML file
+            open my $output_html, '>', $full_path or die "Could not open file '$full_path' for writing: $!";
+            print $output_html $html_content;
+            close $output_html;
+        }
+    }
+}
+
+closedir($dh);
+
+# Add any other processing or actions you want to perform for each matching file.

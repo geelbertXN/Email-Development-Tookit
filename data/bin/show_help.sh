@@ -1,8 +1,14 @@
+#!/bin/bash
+# Color Variables
+# Help Function
+
+    clear
+    echo -ne "
 -----------------------------------------------------------------------------------------
                        geelbertXN EMAIL Development TOOLKIT (GEDT)
                  HELP SECTION - BRIEF DESCRIPTION OF AVAILABLE COMMANDS 
 -----------------------------------------------------------------------------------------
-INSTRUCTIONS:
+INSTRUCTONS:
             1) Locate the init.sh File: Navigate to the script folder in your terminal.
 
             2) Run init.sh: Invoke the init.sh file by entering the command bash init.sh 
@@ -24,21 +30,18 @@ INSTRUCTIONS:
             7) Edit build.sh if Necessary: Before running build.sh, you can edit 
             the information within the file to properly configure paths 
             and other settings based on your project requirements.
-            8)Run help to see the summary of commands
------------------------------------------------------------------------------------------
-                                GEDT AVAILABLE COMMANDS
 -----------------------------------------------------------------------------------------
 rename-project:         This allows the user to update the build.sh
-                        and edit the PROJECT_NAME. Take note that the
+                        and edit the PROJECT_NAME. Take not that the
                         PROJECT_NAME will also be the folder name
                         in the local repository which will later be
-                        pushed to the remote repository. If the local 
+                        push to the remove repository. If the local 
                         repo folder needs to have a folder inside,
-                        you can declare PROJECT_NAME as a path.
-                        For instance, PROJECT_NAME="STORY-00001/headers"
+                        you can declare PROJECT_NAME as path.
+                        For instance PROJECT_NAME="STORY-00001/headers"
                         so on and so forth. To make a directory
                         in the local repository bearing the
-                        PROJECT_NAME assigned value, invoke the 'status' command.
+                        PROJECT_NAME assigned value, invoke 'status' command.
 -----------------------------------------------------------------------------------------
 status:                 Displays the status of files in the repository if
                         the directory is already existing. If the directory
@@ -47,31 +50,36 @@ status:                 Displays the status of files in the repository if
                         declared in the PROJECT_NAME variable
                         in the build.sh.
 -----------------------------------------------------------------------------------------
-init-cue:               Before running init-source, run this command
+init-cue:               Before running init-source run this command
                         to create TEMPLATE_CUE.html. You can edit
                         the TEMPLATE_CUE.html to hold the container names
                         inside [[*]] which will serve as actual placeholders
                         for the actual content.           
 -----------------------------------------------------------------------------------------
-init-source:            Initializes new source HTML files
+init-source:            Initializes a new source html files
                         generated from TEMPLATE_CUE.html.
 -----------------------------------------------------------------------------------------
-wrap-all:               Wraps all container HTML files with
+wrap-all:               Wraps all container html files with
                         the TEMPLATE.html so that we can work
-                        in each container locally.
+                        in each containers locally.
 -----------------------------------------------------------------------------------------
 unwrap:                 Unwraps a previously wrapped file
-                        when the HTML containers are needed
+                        when the html containers are needed
                         to be merged with the main Template.
 -----------------------------------------------------------------------------------------
-merge-cue:              Merges multiple HTML files into one.
-                        It will create TEMPLATE HTML files and CONTAINER
-                        files in the output folder.
+merge-cue:              Merges multiple html files into one.
+                        It will create TEMPLATE html files and CONTAINER
+                        files in the output folder
 -----------------------------------------------------------------------------------------
-copy-files:             Copy files from the current project folder to
+merge-o:                Merges multiple html files into one.
+                        It will create TEMPLATE html files only
+                        in the output folder but will not
+                        copy the and unwrap CONTAINER_* html files.
+-----------------------------------------------------------------------------------------
+copy-files:             Copy files from current project folder to
                         the local repository.
 -----------------------------------------------------------------------------------------
-copy-folder:            Copies an entire folder from the project folder
+copy-folder:            Copies an entire folder from project folder
                         to the local repository.
 -----------------------------------------------------------------------------------------
 pull:                   Fetches changes from a remote repository.
@@ -91,7 +99,7 @@ setup-config:           Configures settings for a specific application or enviro
 -----------------------------------------------------------------------------------------
 rename-images:          Renames image files according to specified rules.
 -----------------------------------------------------------------------------------------
-get-images:             Retrieves images from HTML or text files.
+get-images:             Retrieves images from html or text files
 -----------------------------------------------------------------------------------------
 pull-images:            Pulls images from a folder to an output folder
                         based on the reference cue.txt lists.
@@ -99,7 +107,7 @@ pull-images:            Pulls images from a folder to an output folder
                         one by one.
 -----------------------------------------------------------------------------------------
 remove-prefix:          Removes a specified prefix from file names. 
-                        In this case, CONTAINER_ will be removed from
+                        In this case CONTAINER_ will be removed from
                         the base containers.
 -----------------------------------------------------------------------------------------
 remove-prefix-num:      Removes numerical prefixes from file names.
@@ -108,12 +116,12 @@ remove-prefix-num:      Removes numerical prefixes from file names.
 -----------------------------------------------------------------------------------------
 get-f:                  Retrieves file names of the target folder.
                         Very useful when you want to get all the names
-                        of HTML files to be used as placeholder texts,
+                        of html files to be used as placeholder texts,
                         or the names of images needed for pulling images
-                        from one folder to the output folder.
+                        from one folder to output folder.
 -----------------------------------------------------------------------------------------
 get-f-comp:             This is just getting the file names of files from
-                        a specific directory and wrap them in [[]].
+                        specific directory and wrap them in [[]]
 -----------------------------------------------------------------------------------------
 del-f:                  Deletes a specific file.
 -----------------------------------------------------------------------------------------
@@ -127,41 +135,41 @@ rlinks:                 Replaces all the links with link name and reference numb
                         This will also generate a *_cue.html file and *.link file 
                         The .link file will be used to set up the link replacements.
 -----------------------------------------------------------------------------------------
-rlinks-o:               This will look for .HTML file and .link file that
+rlinks-o:               This will look for .html file and .link file that
                         has the same file names and start the replacement.
-                        The process HTML files with links replaced will be
+                        The process html files with links replaced will be
                         directed to an output folder.
 -----------------------------------------------------------------------------------------
-i/insert:               Inserts content or presets from the bin/assets/HTML
+i/insert:               Inserts content or presets from the bin/assets/html
                         folder to the CONTAINERS_ in the source folder.
                         Note that this will only work if there are
-                        files in the source folder that have CONTAINER_
+                        files in the source folder that has CONTAINER_
                         in the base filename. Eg, to insert container
-                        boilerplate in the CONTAINER_ HTML, place [[cntr-default]]
-                        placeholder in the HTML and run "i" or "insert".
-                        This will pull the content from container.HTML
-                        from the bin/assets/HTML folder and replace
+                        boilerplacte in the CONTAINER_ html, place [[container]]
+                        placeholder in the hml and run "i" or "insert".
+                        This will pull the content from container.html
+                        from the bin/assets/html folder and replace
                         the placeholder with the extracted content.
-                        You can also edit the bin/assets/HTML folder 
+                        You can also edit the bin/assets/html folder 
                         to expand the content that you can insert.
-                        If you want to see the list of available inserts
-                        use [[i-list]] in a CONTAINER_* html.
+-----------------------------------------------------------------------------------------
+extract-content         add {extract=*} and {extract-end} to the content you
+                        want to extract, then run the command 'extract-content'.
+                        This will create an html file in an output_extracted folder.
 -----------------------------------------------------------------------------------------
 mjml:                   Converts MJML (MailJet Markup Language) to HTML.
-                        This will look for all the MJML files in the
+                        This will look for all the mjml files in the
                         source folder of the current directory where
                         the script is running and compile all MJML
                         files into HTML files. The generated content
                         will be directed to the output folder.
-                        MJML library should be installed in your system
-                        in order for this command to work.
 -----------------------------------------------------------------------------------------
 quit/exit/0:            Exits the current session or program.
 -----------------------------------------------------------------------------------------
                                  SUMMARY OF COMMANDS
 -----------------------------------------------------------------------------------------
                         init-source               wrap-all unwrap
-                        init-cue                  merge-cue
+                        init-cue                  merge-cue merge-o
                         copy-files                copy-folder 
                         pull push                 status log
                         setup-cred                zip unzip
@@ -170,59 +178,17 @@ quit/exit/0:            Exits the current session or program.
                         remove-prefix             remove-prefix-num
                         get-f get-f-comp          del-f del-d del-o
                         rlinks rlinks-o           i/insert
-                        rename-project            
-                        mjml
+                        i-r/i-data                i-s/i-symbol
+                        rename-project            extract-content
+                        mjml                      ff/f-font
+                        gen-img                   add-zwj/add-zwnj              
                         about    
                         quit
-
------------------------------------------------------------------------
-i/insert list currently available values
-<!-- BUTTONS -->
-  [[btn-223]]
-  [[btn-228]]
-  
-  <!-- CONTAINERS -->
-  <!-- inserting this will give you the currently available
-  list of containers in the assets folder -->
-  [[i-containers]]
-  
-  <!-- IMAGE PRESETS -->
-  [[img-50]]
-  [[img-295]]
-  [[img-520]]
-  [[img-600]]
-  [[img-fw]]
-  
-  <!-- TEXT CONTENTS -->
-  [[headline-medium]]
-  [[body-txt]]
-  [[sitb-grey]]
-  
-  <!-- FONTS -->
-  [[book]]
-  [[book-blue]]
-  [[italic]]
-  [[italic-grey]]
-  [[medium]]
-  [[medium-blue]]
-  [[bold]]
-  [[webkit]]
-  
-  <!-- SYMBOLS -->
-  [[copy]]
-  [[reg]]
-  [[tm]]
-  [[apos]]
-  [[dollar]]
-  [[ndash]]
-  [[mdash]]
-
-  <!-- MSO -->
-  [[gte-mso]]
-  [[mso]]
-  [[no-mso]]
-
-  -----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
                        geelbertXN EMAIL Development TOOLKIT (GEDT)
                     Work your passion and have passion in your work.
 -----------------------------------------------------------------------------------------
+"
+read -n 1 -s -r -p "Pess any key to exit..."
+clear
+exit 1

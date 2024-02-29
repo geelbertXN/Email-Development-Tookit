@@ -1,0 +1,60 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+sub join_lines_in_selected_texts {
+    my ($input_file, $start_marker, $end_marker) = @_;
+
+    open(my $fh, '<', $input_file) or die "Can't open input file $input_file: $!";
+    
+    my @lines;
+    my $inside_block = 0;
+
+    # Read the file line by line
+    while (my $line = <$fh>) {
+        if ($line =~ /$start_marker/) {
+            $inside_block = 1;
+            push @lines, $line;
+        } elsif ($inside_block) {
+            if ($line =~ /$end_marker/) {
+                $inside_block = 0;
+                push @lines, $line;
+                # chomp(@lines);
+            } else {
+                $lines[-1] .= $line;  # Append to the last element
+                # chomp(@lines);
+            }
+        }
+    }
+
+    close($fh);
+
+    # Join all lines into one string
+    # Remove newline characters from the end of each line
+    # foreach my $line (@lines) {
+    #     $line =~ s/\R//g;  # Remove newline characters
+    # }
+    my $content = join('', @lines);
+
+    # Print the joined content
+    print $content;
+    # print "\n";
+
+     # Write the modified content back to the file
+    open($fh, '>', $input_file) or die "Can't open input file $input_file for writing: $!";
+    print $fh $content;
+    close($fh);
+}
+
+# Main
+# print "Enter the input file name: ";
+# my $input_file = <STDIN>;
+my $input_file = "source/font.css";
+chomp($input_file);
+
+# HTML-encode the markers
+my $start_marker = quotemeta('[[');
+my $end_marker = quotemeta(']]');
+
+join_lines_in_selected_texts($input_file, $start_marker, $end_marker);

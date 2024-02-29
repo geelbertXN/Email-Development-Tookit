@@ -1,0 +1,41 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+# Define the source directory
+my $source_dir = "source";
+my $joined_line;
+
+# Open the directory
+opendir(my $dh, $source_dir) || die "Can't open $source_dir: $!";
+
+# Read files from the directory
+while (my $file = readdir $dh) {
+    # Skip if the file is not a .css file
+    next unless $file =~ /\.css$/;
+
+    # Read the content of the file
+    open(my $fh, '<', "$source_dir/$file") || die "Can't open file $file: $!";
+    my @lines = <$fh>;
+    close $fh;
+
+    # Open the file for writing
+    open($fh, '>', "$source_dir/$file") || die "Can't open file $file for writing: $!";
+
+    # Iterate through lines and replace empty lines with a specific string
+    foreach my $line (@lines) {
+        # Check if the line is empty
+        if ($line =~ /^\s*$/) {
+            # Replace empty lines with ---------------------------------
+            print $fh "\n---------------------------------\n";
+        } else {
+            # Otherwise, print the original line
+            print $fh $line;
+        }
+    }
+    # Close the file handle
+    close $fh;
+}
+
+closedir $dh;

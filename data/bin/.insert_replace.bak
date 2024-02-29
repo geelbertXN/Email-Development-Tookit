@@ -1,0 +1,69 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+# Initialize $section to 'null'
+my $section = 'null';
+
+sub join_lines_in_selected_texts {
+    my ($input_file, $start_marker, $end_marker) = @_;
+
+    open(my $fh, '<', $input_file) or die "Can't open input file $input_file: $!";
+    
+    my @lines;
+    my $inside_block = 0;
+    my $new_line;
+    my $value;
+    my $key;
+
+    # Read the file line by line
+    while (my $line = <$fh>) {
+        if ($line =~ /$start_marker/) {
+            $inside_block = 1;
+            # print "$start_marker/n";
+            ($section) = $line =~ /\[start=(.*?)\]/;
+            print "SECTION:$section\n";
+            # $section //= '';  # Initialize $section to an empty string if not defined
+        } elsif ($inside_block) {
+            if ($line =~ /$end_marker/) {
+                $inside_block = 0;
+            } else {
+                # Exclude start and end markers
+                my $new_line = $section."_".$line;
+                if ($line =~ /^(\w+)=(.+)/) {
+                    $key = $1;
+                    $value = $2;
+                }
+                print "key: $key value: $value\n";
+                # print "$value\n";
+                # print "$new_line\n";
+                
+                # push @lines, $line unless $line =~ /$start_marker|$end_marker/;
+            }
+        }
+    }
+    close($fh);
+
+    # Join all lines into one string
+    # my $content = join('', @lines);
+
+    # Print the joined content
+    # print $content;
+
+    # Write the modified content back to the file
+    # open($fh, '>', $input_file) or die "Can't open input file $input_file for writing: $!";
+    # print $fh $content;
+    # close($fh);
+}
+
+# Main
+# my $input_file = "demo/r.html";
+my $input_file = "demo/r.html";
+chomp($input_file);
+
+# HTML-encode the markers
+my $start_marker = quotemeta('[start');
+my $end_marker = quotemeta('[end]');
+
+join_lines_in_selected_texts($input_file, $start_marker, $end_marker);
